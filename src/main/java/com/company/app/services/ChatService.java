@@ -13,7 +13,7 @@ public class ChatService {
         this.chatRepository = chatRepository;
     }
 
-    public Chat save(Chat chat){
+    public Chat save(Chat chat) {
         return chatRepository.save(chat);
     }
 }

@@ -16,7 +16,7 @@ public class Chat {
     private String name;
 
     @Column(name = "users_id")
-    @ElementCollection(targetClass=User.class)
+    @ElementCollection(targetClass = User.class)
     private List<User> users;
 
     @Column(name = "created_at", columnDefinition = "timestamp without time zone")
@@ -37,6 +37,15 @@ public class Chat {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+
+//    public List<Integer> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<Integer> users) {
+//        this.users = users;
+//    }
 
     public Date getCreatedAt() {
         return createdAt;

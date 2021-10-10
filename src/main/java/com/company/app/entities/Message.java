@@ -1,58 +1,43 @@
 package com.company.app.entities;
 
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "message")
-public class Message {
+public class Message implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "chat_id", insertable = false,updatable = false)
+//    private Chat chat;
 
     @Column(name = "chat_id")
-    private Integer _id;
+    private Integer  chatId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User author;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+//    private User author;
+
+    @Column(name = "user_id")
+    private Integer authorId;
 
     @Column(name = "text")
     private String text;
 
-    @Column(name = "created_at", columnDefinition = "timestamp without time zone")
+    @Column(name = "created_at", columnDefinition = "date")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date createdAt;
 
-    public Integer get_id() {
-        return _id;
-    }
-
-    public void set_id(Integer _id) {
-        this._id = _id;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 }

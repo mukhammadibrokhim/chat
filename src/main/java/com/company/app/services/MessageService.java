@@ -4,6 +4,8 @@ import com.company.app.entities.Message;
 import com.company.app.repositories.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class MessageService {
 
@@ -15,6 +17,8 @@ public class MessageService {
 
 
     public Message save(Message message) {
+
+        message.setCreatedAt(new Date());
         return messageRepository.save(message);
     }
 }

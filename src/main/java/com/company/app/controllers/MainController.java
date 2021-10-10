@@ -6,8 +6,13 @@ import com.company.app.entities.User;
 import com.company.app.services.ChatService;
 import com.company.app.services.MessageService;
 import com.company.app.services.UserService;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -36,9 +41,9 @@ public class MainController {
     }
 
     @PostMapping(value = "/chats/add")
-    public ResponseEntity createChat(@RequestBody Chat chat) {
-        Chat createChat = chatService.save(chat);
-        return ResponseEntity.ok(createChat);
+    public ResponseEntity createChat(@RequestBody Chat chat)  {
+        Chat chat1 = chatService.save(chat);
+        return ResponseEntity.ok(chat1);
     }
 
     @PostMapping(value = "/message/add")
@@ -47,10 +52,12 @@ public class MainController {
         return ResponseEntity.ok(sendMessage);
     }
 
-//    @GetMapping(value = "/chats/get")
-//    public ResponseEntity getAllChats(){
-//        return ResponseEntity.ok();
-//    }
+    @GetMapping(value = "/chats/get")
+    public ResponseEntity getAllChats(){
+
+//        return ResponseEntity.ok(chatService.getChatListDate());
+        return ResponseEntity.ok(chatService.getChatListDate());
+    }
 
 
 //    @GetMapping(value = "/message/get")

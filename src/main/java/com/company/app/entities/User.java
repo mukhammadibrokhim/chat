@@ -1,43 +1,30 @@
 package com.company.app.entities;
 
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "chat_user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "user_name")
     private String username;
 
-    @Column(name = "created_at", columnDefinition = "timestamp without time zone")
+    @Column(name = "created_at", columnDefinition = "date")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date createdAt;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 }

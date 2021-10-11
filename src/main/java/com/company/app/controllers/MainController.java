@@ -47,23 +47,21 @@ public class MainController {
     }
 
     @PostMapping(value = "/message/add")
-    public ResponseEntity message(@RequestBody Message message) {
+    public ResponseEntity messageSend( @RequestBody Message message) {
         Message sendMessage = messageService.save(message);
         return ResponseEntity.ok(sendMessage);
     }
 
-    @GetMapping(value = "/chats/get")
-    public ResponseEntity getAllChats(){
-
-//        return ResponseEntity.ok(chatService.getChatListDate());
-        return ResponseEntity.ok(chatService.getChatListDate());
+    @PostMapping(value = "/chats/get")
+    public ResponseEntity getAllChats(@RequestBody User user){
+        return ResponseEntity.ok(chatService.getChatList(user));
     }
 
 
-//    @GetMapping(value = "/message/get")
-//    public ResponseEntity getMessage(){
-//        return ResponseEntity.ok();
-//    }
+    @GetMapping(value = "/message/get")
+    public ResponseEntity getMessage(){
+        return ResponseEntity.ok(messageService.messageList());
+    }
 
 
 

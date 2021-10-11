@@ -1,16 +1,14 @@
 package com.company.app.services;
 
 import com.company.app.entities.Chat;
-import com.company.app.entities.Message;
 import com.company.app.entities.User;
 import com.company.app.repositories.ChatRepository;
 import com.company.app.repositories.MessageRepository;
 import com.company.app.repositories.UserRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ChatService {
@@ -27,7 +25,7 @@ public class ChatService {
         this.userService = userService;
     }
 
-    public Optional<Chat> getOne(Integer id){
+    public Optional<Chat> getOne(Integer id) {
         return chatRepository.findById(id);
     }
 
@@ -41,13 +39,23 @@ public class ChatService {
 
     }
 
-    public List<Chat> getChatListDate() {
-        List<Chat> chatList = chatRepository.findAll();
-        for (int i = 0; i < chatList.size(); i++) {
-            chatList.get(i);
-        }
+    public User getChatList(User user) {
+          User user1 = userRepository.getById(user.getId());
 
-        return chatList;
-
+        System.out.println(user1);
+        return user1;
     }
+
+//    public User gelAllSortedDateDesc(Integer id){
+//        Optional<Chat> chat1 = chatRepository.findById(id);
+//
+//
+//
+//
+//    }
+
+
+//    public User gelAllSortedDateDesc() {
+//
+//    }
 }

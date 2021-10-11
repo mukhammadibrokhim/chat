@@ -19,19 +19,13 @@ public class Message implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "chat_id", insertable = false,updatable = false)
-//    private Chat chat;
+    @OneToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "chat_id")
+    private Chat chat;
 
-    @Column(name = "chat_id")
-    private Integer  chatId;
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-//    private User author;
-
-    @Column(name = "user_id")
-    private Integer authorId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User author;
 
     @Column(name = "text")
     private String text;

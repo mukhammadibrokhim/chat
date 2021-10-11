@@ -33,4 +33,13 @@ public class Chat implements Serializable {
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date createdAt;
 
+    public User getuser(User user){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.contains(user)){
+                users.get(user.getId());
+                return user;
+            }
+        }
+        return null;
+    }
 }

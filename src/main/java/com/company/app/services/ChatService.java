@@ -40,22 +40,13 @@ public class ChatService {
     }
 
     public User getChatList(User user) {
-          User user1 = userRepository.getById(user.getId());
+        User user1 = userRepository.getById(user.getId());
+        List<Chat> chat = chatRepository.findAllByOrderByCreatedAtDesc();
+        for (int i = 0; i < chat.size(); i++) {
 
-        System.out.println(user1);
-        return user1;
+
+            if (user1.getCreatedAt().compareTo(chat.get(i)))
+                return user1;
+        }
     }
-
-//    public User gelAllSortedDateDesc(Integer id){
-//        Optional<Chat> chat1 = chatRepository.findById(id);
-//
-//
-//
-//
-//    }
-
-
-//    public User gelAllSortedDateDesc() {
-//
-//    }
 }

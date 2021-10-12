@@ -8,6 +8,8 @@ import com.company.app.repositories.UserRepository;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -34,10 +36,11 @@ public class ChatService {
         return chatRepository.save(chat);
     }
 
-    public Object getAllChats(User user) {
+    public List<Chat> getAllChats(User user) {
+        User user1 = userService.getFromUserId(user.getId());
         List<Chat> chats = chatRepository.findAllByUsersOrderByCreatedAtDesc(user);
         for (Chat chat : chats) {
-            if (chat.getUsers().contains(user)) {
+            if (chat.getUsers().contains(user1)) {
                 ArrayList arrayList = new ArrayList();
                 arrayList.add(chats);
                 return arrayList;

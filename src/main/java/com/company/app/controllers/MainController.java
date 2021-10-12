@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -55,13 +57,21 @@ public class MainController {
 
     @PostMapping(value = "/chats/get")
     public ResponseEntity getAllChats(@RequestBody User user) {
-        return ResponseEntity.ok(chatService.getAllChats(user));
+        List<Chat> chat = chatService.getAllChats(user);
+        if (chat == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(chat);
     }
 
 
     @PostMapping(value = "/message/get")
     public ResponseEntity getMessage(@RequestBody Chat chat) {
-        return ResponseEntity.ok(messageService.getAllMessagesDateDesc(chat));
+        ArrayList message = messageService.getAllMessagesDateDesc(chat);
+        if (message == null) {
+            return new ResponseEntity<Message>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(message);
     }
 
 

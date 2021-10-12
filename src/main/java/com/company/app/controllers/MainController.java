@@ -7,6 +7,7 @@ import com.company.app.services.ChatService;
 import com.company.app.services.MessageService;
 import com.company.app.services.UserService;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class MainController {
 
     @GetMapping("/getAllUsers")
     public ResponseEntity getUser() {
-        return ResponseEntity.ok(userService.getusers());
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping(value = "/users/add")
@@ -41,29 +42,27 @@ public class MainController {
     }
 
     @PostMapping(value = "/chats/add")
-    public ResponseEntity createChat(@RequestBody Chat chat)  {
+    public ResponseEntity createChat(@RequestBody Chat chat) {
         Chat chat1 = chatService.save(chat);
         return ResponseEntity.ok(chat1);
     }
 
     @PostMapping(value = "/message/add")
-    public ResponseEntity messageSend( @RequestBody Message message) {
+    public ResponseEntity messageSend(@RequestBody Message message) {
         Message sendMessage = messageService.save(message);
         return ResponseEntity.ok(sendMessage);
     }
 
     @PostMapping(value = "/chats/get")
-    public ResponseEntity getAllChats(@RequestBody User user){
-        return ResponseEntity.ok(chatService.getChatList(user));
+    public ResponseEntity getAllChats(@RequestBody User user) {
+        return ResponseEntity.ok(chatService.getAllChats(user));
     }
 
 
-    @GetMapping(value = "/message/get")
-    public ResponseEntity getMessage(){
-        return ResponseEntity.ok(messageService.messageList());
+    @PostMapping(value = "/message/get")
+    public ResponseEntity getMessage(@RequestBody Chat chat) {
+        return ResponseEntity.ok(messageService.getAllMessagesDateDesc(chat));
     }
-
-
 
 
 }

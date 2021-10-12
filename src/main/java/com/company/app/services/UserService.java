@@ -16,7 +16,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getusers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -25,7 +25,4 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getOne(Integer id){
-        return userRepository.getById(id);
-    }
 }

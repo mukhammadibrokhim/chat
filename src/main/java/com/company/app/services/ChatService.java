@@ -5,7 +5,7 @@ import com.company.app.entities.User;
 import com.company.app.repositories.ChatRepository;
 import com.company.app.repositories.MessageRepository;
 import com.company.app.repositories.UserRepository;
-import org.springframework.data.domain.Sort;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -34,19 +34,15 @@ public class ChatService {
         return chatRepository.save(chat);
     }
 
-    public Chat getChat(Integer id) {
-        return chatRepository.getById(id);
-
-    }
-
-    public User getChatList(User user) {
-        User user1 = userRepository.getById(user.getId());
-        List<Chat> chat = chatRepository.findAllByOrderByCreatedAtDesc();
-        for (int i = 0; i < chat.size(); i++) {
-
-
-            if (user1.getCreatedAt().compareTo(chat.get(i)))
-                return user1;
+    public Object getAllChats(User user) {
+        List<Chat> chats = chatRepository.findAllByUsersOrderByCreatedAtDesc(user);
+        for (Chat chat : chats) {
+            if (chat.getUsers().contains(user)) {
+                ArrayList arrayList = new ArrayList();
+                arrayList.add(chats);
+                return arrayList;
+            }
         }
+        return null;
     }
 }
